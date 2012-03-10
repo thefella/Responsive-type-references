@@ -1,0 +1,7 @@
+# Responsive Type References
+
+## Install
+
+Upload the PHP script to your site, then visit it and choose your font selection using comma-separated values. If no fonts are given, it defaults to Georgia.
+
+    http://example.com/responsive-type-references.php?font=Georgia,Helvetica,Times New Roman
