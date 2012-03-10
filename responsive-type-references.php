@@ -1,6 +1,6 @@
 <?php
 // Get user fonts or default to Georgia
-$fonts = ($_GET['font']) ? htmlspecialchars($_GET['font']) : 'Georgia';
+$fonts = ($_GET['font']) ? trim(htmlspecialchars($_GET['font']), ",") : 'Georgia';
 $fonts = explode(",", $fonts);
 $count = count($fonts);
 
@@ -11,6 +11,12 @@ $small = array('10','11','12');
 
 // Work out the width
 $width = round(100 / $count, 4);
+
+// See if Typekit is needed
+$typekit = ($_GET['typekit']) ? htmlspecialchars($_GET['typekit']) : null;
+
+// See if you'd rather use Google Web Fonts
+$google = ($_GET['google']) ? htmlspecialchars($_GET['google']) : null;
 ?>
 <!doctype html>
 
@@ -59,6 +65,13 @@ p.caption { display : inline-block; padding : 6px; font-size : 12px; text-transf
 article { float : left; width : <?=$width?>%; overflow : hidden; }
 span.font-name { display : block; font-size : 14px; color : #ccc; padding-bottom : 0.25em; }
 </style>
+<?php if (isset($typekit)) : ?>
+<script type="text/javascript" src="http://use.typekit.com/<?=$typekit?>.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<?php endif; ?>
+<?php if (isset($google)) : ?>
+<link href="http://fonts.googleapis.com/css?family=<?=$google?>" rel="stylesheet" type="text/css">
+<?php endif; ?>
 </head>
 
 <body>
