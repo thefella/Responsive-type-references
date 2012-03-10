@@ -169,8 +169,15 @@ var Detector = function(){
 };
 var detective = new Detector();
 <?php foreach ($fonts as $font) : ?>
-var colour = (detective.detect('<?=$font?>') === true) ? '#6fbf4d' : '#e06666';
-var box = '<span style="display:inline-block; width:8px; height:8px; margin-right:6px; background-color:'+colour+';"></span>';
+var colour,title;
+if (detective.detect('<?=$font?>') === true) {
+	colour = '#6fbf4d';
+	title = "Your font should be displayed!";
+} else {
+	colour = '#e06666';
+	title = "Dammit, your font is missing.";
+}
+var box = '<span style="display:inline-block; width:9px; height:9px; margin-right:6px; background-color:'+colour+';" title="'+title+'"></span>';
 var element = $("#<?=str_replace(" ", "", strtolower($font))?> h2 span");
 element.prepend(box);
 <?php endforeach; ?>
