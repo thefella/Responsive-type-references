@@ -20,6 +20,14 @@ Or even add in your Google Web Fonts:
 If you really can't decide what font to use, you can even include both font libraries:
 
 	http://example.com/responsive-type.php?typekit=nqy2rqt&google=Prosto+One&font=Georgia,chaparral-pro,Prosto One
+	
+## Font Availability
+
+Some fonts might look very similar, so how do you know if it's been included in your page? What happens if you've made a typo in the URL? I've added a script that detects what font is supposed to be there and compares it with the base font. This script is from [lalit.lab](http://www.lalit.org/lab/javascript-css-font-detect/), I did none of the hard work. 
+
+If the font is available, you get a green square next to the font name. If not, you get a red square. You might not want the overhead of javascript, so you can exclude it from the page using the 'js=no' parameter.
+
+	http://example.com/responsive-type.php?font=Georgia,Helvetica&js=no
 
 
 ## About
