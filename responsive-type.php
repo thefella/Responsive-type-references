@@ -16,7 +16,7 @@ $width = round(100 / $count, 4);
 $typekit = ($_GET['typekit']) ? htmlspecialchars($_GET['typekit']) : null;
 
 // See if you'd rather use Google Web Fonts
-$google = ($_GET['google']) ? htmlspecialchars($_GET['google']) : null;
+$google = ($_GET['google']) ? str_replace(" ", "+", htmlspecialchars($_GET['google'])) : null;
 ?>
 <!doctype html>
 
@@ -61,9 +61,12 @@ div { margin-bottom : 1.5em; padding-bottom : 1.5em; border-bottom : 1px solid #
 p { margin-bottom : 22px; line-height : 1.5; }
 h3 { margin-bottom : 22px; font-weight : bold; }
 p.caption { display : inline-block; padding : 6px; font-size : 12px; text-transform : uppercase; background-color : #ccc; }
-<?php if ($count > 1) : ?>article div, article h2 { margin-left : 10%; margin-right : 10%; } <?php endif; ?>
-article { float : left; width : <?=$width?>%; overflow : hidden; }
+article { overflow : hidden; }
 span.font-name { display : block; font-size : 14px; color : #ccc; padding-bottom : 0.25em; }
+@media only screen and (min-width: 480px) { 
+	article { float : left; width : <?=$width?>%; }
+	<?php if ($count > 1) : ?>article div, article h2 { margin-left : 10%; margin-right : 10%; } <?php endif; ?>
+}
 </style>
 <?php if (isset($typekit)) : ?>
 <script type="text/javascript" src="http://use.typekit.com/<?=$typekit?>.js"></script>
