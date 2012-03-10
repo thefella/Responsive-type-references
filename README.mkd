@@ -4,24 +4,24 @@
 
 Upload the PHP script to your site, then visit it and choose your font selection using comma-separated values. If no fonts are given, it defaults to Georgia.
 
-    http://example.com/responsive-type-references.php?font=Georgia,Helvetica,Times New Roman
+    http://example.com/responsive-type.php?font=Georgia,Helvetica,Times New Roman
 
 
 ## Web Fonts
     
 You can also add in your Typekit ID if you want to include web fonts:
 
-    http://example.com/responsive-type-references.php?typekit=nqy2rqt&font=Georgia,Helvetica,chaparral-pro
+    http://example.com/responsive-type.php?typekit=nqy2rqt&font=Georgia,Helvetica,chaparral-pro
 
 Or even add in your Google Web Fonts:
 
-    http://example.com/responsive-type-references.php?google=Prosto+One&font=Georgia,Helvetica,Prosto One
+    http://example.com/responsive-type.php?google=Prosto+One&font=Georgia,Helvetica,Prosto One
     
 If you really can't decide what font to use, you can even include both font libraries:
 
-	http://example.com/responsive-type-references.php?typekit=nqy2rqt&google=Prosto+One&font=Georgia,chaparral-pro,Prosto One
+	http://example.com/responsive-type.php?typekit=nqy2rqt&google=Prosto+One&font=Georgia,chaparral-pro,Prosto One
 
 
 ## About
 
-Forked from the original idea by [@Malarkey](http://twitter.com/travisci). PHP feedback, idea and support to [@thefella](http://twitter.com/thefella).
+Forked from the original idea by [@Malarkey](http://twitter.com/Malarkey). PHP feedback, idea and support to [@thefella](http://twitter.com/thefella).
