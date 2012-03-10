@@ -24,4 +24,4 @@ If you really can't decide what font to use, you can even include both font libr
 
 ## About
 
-Forked from the original idea by [@Malarkey](http://twitter.com/Malarkey). PHP feedback, idea and support to [@thefella](http://twitter.com/thefella).
+Forked from the original idea by [@Malarkey](http://twitter.com/Malarkey). PHP feedback, ideas and support to [@thefella](http://twitter.com/thefella).
