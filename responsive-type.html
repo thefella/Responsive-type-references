@@ -1,23 +1,3 @@
-<?php
-// Get user fonts or default to Georgia
-$fonts = ($_GET['font']) ? trim(htmlspecialchars($_GET['font']), ",") : 'Georgia';
-$fonts = explode(",", $fonts);
-$count = count($fonts);
-
-// Define font sizes
-$normal = array('12','14','16');
-$heading = array('16','18','21','24','36','48');
-$small = array('10','11','12');
-
-// Work out the width
-$width = round(100 / $count, 4);
-
-// See if Typekit is needed
-$typekit = ($_GET['typekit']) ? htmlspecialchars($_GET['typekit']) : null;
-
-// See if you'd rather use Google Web Fonts
-$google = ($_GET['google']) ? str_replace(" ", "+", htmlspecialchars($_GET['google'])) : null;
-?>
 <!doctype html>
 
 <!-- 
@@ -26,7 +6,7 @@ Author: Andy Clarke (http://about.me/malarkey)
 Author: Keith Clark (http://twitter.com/keithclarkcouk)
 URL: http://stuffandnonsense.co.uk/projects/320andup/
 License: http://creativecommons.org/licenses/MIT/
-PHP'd: Conor MacNeill (http://twitter.com/thefella)
+Dynamicness: Conor MacNeill (http://twitter.com/thefella)
 -->
 
 <!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
@@ -64,46 +44,109 @@ p.caption { display : inline-block; padding : 6px; font-size : 12px; text-transf
 article { overflow : hidden; }
 span.font-name { display : block; font-size : 14px; color : #ccc; padding-bottom : 0.25em; }
 @media only screen and (min-width: 480px) { 
-	article { float : left; width : <?php echo $width?>%; }
-	<?php if ($count > 1) : ?>article div, article h2 { margin-left : 10%; margin-right : 10%; } <?php endif; ?>
+	article { float : left; width : 100%; }
+	.many article div, .many article h2 { margin-left : 10%; margin-right : 10%; }
 }
 </style>
-<?php if (isset($typekit)) : ?>
-<script type="text/javascript" src="http://use.typekit.com/<?php echo $typekit?>.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<?php endif; ?>
-<?php if (isset($google)) : ?>
-<<<<<<< HEAD
-<link href="http://fonts.googleapis.com/css?family=<?php echo $google?>" rel="stylesheet" type="text/css">
-=======
-<link href="//fonts.googleapis.com/css?family=<?=$google?>" rel="stylesheet" type="text/css">
->>>>>>> Added JavaScript version
-<?php endif; ?>
 </head>
-
 <body>
-<?php foreach ($fonts as $font) : ?>
-<article id="<?php echo str_replace(" ", "", strtolower($font))?>" style="font-family:'<?php echo $font?>';">
+<script>
+// Get user fonts or default to Georgia
+//var fonts = getParameterByName("font") ? getParameterByName("font") : 'Impact';
+var fonts = getUrlVars()["font"] ? getUrlVars()["font"] : 'Georgia';
+fonts = fonts.replace(/(^,)|(,$)/g, "");
+fonts = unescape(fonts);
+fonts = fonts.split(",");
+var count = fonts.length;
 
-<h2><span class="font-name"><?php echo $font?></span> Type readability reference</h2>
-<?php foreach ($normal as $size) : ?>
-<div><p style="font-size:<?php echo $size?>px">When a new medium borrows from an existing one, some of what it borrows makes sense, but much of the borrowing is thoughtless, &#8220;ritual&#8221;, and often constrains the new medium. Over time, the new medium develops its own conventions, throwing off existing conventions that don&#8217;t make sense.</p><p class="caption"><?php echo $size?>px</p></div>
-<?php endforeach; ?>
+// Define font sizes
+var normal = ['12','14','16'];
+var heading = ['16','18','21','24','36','48'];
+var small = ['10','11','12'];
 
-<h2><span class="font-name"><?php echo $font?></span> Heading word wrap reference</h2>
-<?php foreach ($heading as $size) : ?>
-<div><h3 style="font-size:<?php echo $size?>px">When a new medium borrows from an existing one</h3><p class="caption"><?php echo $size?>px</p></div>
-<?php endforeach; ?>
+// Work out the width
+var width = Math.round((100 / count)*1000)/1000;
 
-<h2><span class="font-name"><?php echo $font?></span> Small type size reference</h2>
-<?php foreach ($normal as $size) : ?>
-<div><p style="font-size:<?php echo $size?>px">Small type size reference</p><p class="caption"><?php echo $size?>px</p></div>
-<?php endforeach; ?>
+// See if Typekit is needed
+var typekit = getParameterByName("typekit") ? getParameterByName("typekit") : null;
+if (typekit != null) {
+	var typekitlink = document.createElement("script");
+	typekitlink.setAttribute("src", "http://use.typekit.com/"+typekit+".js");
+	document.getElementsByTagName("head")[0].appendChild(typekitlink);
+	var typekitlink2 = document.createElement("script");
+	typekitlink2.innerHTML = 'try{Typekit.load();}catch(e){}';
+	document.getElementsByTagName("head")[0].appendChild(typekitlink2);
+}
 
-</article>
-<?php endforeach; ?>
+// See if you'd rather use Google Web Fonts
+var google = getParameterByName("google") ? getParameterByName("google") : null;
+if (google != null) {
+	google = google.replace(" ", "+");
+	var googlelink = document.createElement("link");
+	googlelink.setAttribute("rel", "stylesheet");
+	googlelink.setAttribute("href", "//fonts.googleapis.com/css?family="+google);
+	document.getElementsByTagName("head")[0].appendChild(googlelink);
+}
 
-<?php if (($_GET['js']) != 'no') : ?>
+// Get custom sizes
+var sizes = getParameterByName("sizes") ? getParameterByName("sizes") : null;
+if (sizes != null)
+	var custom_sizes = sizes.split(",");
+
+// Build page
+var page = '';
+for (var font in fonts) {
+	page += '<article id="'+fonts[font].replace(/\s/g, "").toLowerCase()+'" style="width:'+width+'%; font-family:\''+fonts[font]+'\';">';
+	if (sizes != null) {
+		page += '<h2><span class="font-name">'+fonts[font]+'</span> Custom size reference</h2>';
+		for (var size in custom_sizes) {
+			page += '<div><p style="font-size:'+custom_sizes[size]+'px">When a new medium borrows from an existing one, some of what it borrows makes sense, but much of the borrowing is thoughtless, &#8220;ritual&#8221;, and often constrains the new medium. Over time, the new medium develops its own conventions, throwing off existing conventions that don&#8217;t make sense.</p><p class="caption">'+custom_sizes[size]+'px</p></div>';
+		}
+	}
+	page += '<h2><span class="font-name">'+fonts[font]+'</span> Type readability reference</h2>';
+	for (var size in normal) {
+		page += '<div><p style="font-size:'+normal[size]+'px">When a new medium borrows from an existing one, some of what it borrows makes sense, but much of the borrowing is thoughtless, &#8220;ritual&#8221;, and often constrains the new medium. Over time, the new medium develops its own conventions, throwing off existing conventions that don&#8217;t make sense.</p><p class="caption">'+normal[size]+'px</p></div>';
+	}
+	page += '<h2><span class="font-name">'+fonts[font]+'</span> Heading word wrap reference</h2>';
+	for (var size in heading) {
+		page += '<div><h3 style="font-size:'+heading[size]+'px">When a new medium borrows from an existing one</h3><p class="caption">'+heading[size]+'px</p></div>';
+	}
+	page += '<h2><span class="font-name">'+fonts[font]+'</span> Small type size reference</h2>';
+	for (var size in small) {
+		page += '<div><p style="font-size:'+small[size]+'px">Small type size reference</p><p class="caption">'+small[size]+'px</p></div>';
+	}
+	page += '</article>';
+}
+document.body.innerHTML = page;
+
+if (count > 0)
+	document.getElementsByTagName('body')[0].className += 'many';
+
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regexS = "[\\?&]" + name + "=([^&#]*)";
+	var regex = new RegExp(regexS);
+	var results = regex.exec(window.location.search);
+	if(results == null)
+		return null;
+	else
+		return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
 /**
@@ -172,9 +215,9 @@ var Detector = function(){
 	this.detect = detect;	
 };
 var detective = new Detector();
-<?php foreach ($fonts as $font) : ?>
+for (var font in fonts) {
 var colour,title;
-if (detective.detect('<?php echo $font?>') === true) {
+if (detective.detect(fonts[font]) === true) {
 	colour = '#6fbf4d';
 	title = "Your font should be displayed!";
 } else {
@@ -182,10 +225,9 @@ if (detective.detect('<?php echo $font?>') === true) {
 	title = "Dammit, your font is missing.";
 }
 var box = '<span style="display:inline-block; width:9px; height:9px; margin-right:6px; background-color:'+colour+';" title="'+title+'"></span>';
-var element = $("#<?php echo str_replace(" ", "", strtolower($font))?> h2 span");
+var element = $("#"+fonts[font].replace(/\s/g, "").toLowerCase()+" h2 span");
 element.prepend(box);
-<?php endforeach; ?>
+}
 </script>
-<?php endif; ?>
 </body>
 </html>
