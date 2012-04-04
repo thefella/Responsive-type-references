@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Responsive Type References : Dynamic font testing" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Responsive Type References</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/thefella/Responsive-type-references">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Responsive Type References</h1>
+          <h2 id="project_tagline">Dynamic font testing</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/thefella/Responsive-type-references/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/thefella/Responsive-type-references/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Responsive Type References</h1>
+
+<h2>Usage</h2>
+
+<p>Upload the PHP or HTML file to your site, then visit it and choose your font selection using comma-separated values. If no fonts are given, it defaults to Georgia.</p>
+
+<pre><code><a href="http://example.com/responsive-type.php?font=Georgia,Helvetica,Times">http://example.com/responsive-type.php?font=Georgia,Helvetica,Times</a> New Roman
+
+<a href="http://example.com/responsive-type.html?font=Georgia,Helvetica,Times">http://example.com/responsive-type.html?font=Georgia,Helvetica,Times</a> New Roman
+</code></pre>
+
+<h2>Web Fonts</h2>
+
+<p>You can also add in your Typekit ID if you want to include web fonts:</p>
+
+<pre><code><a href="http://example.com/responsive-type.php?typekit=nqy2rqt&amp;font=Georgia,Helvetica,chaparral-pro">http://example.com/responsive-type.php?typekit=nqy2rqt&amp;font=Georgia,Helvetica,chaparral-pro</a>
+</code></pre>
+
+<p>Or even add in your Google Web Fonts:</p>
+
+<pre><code><a href="http://example.com/responsive-type.php?google=Prosto+One&amp;font=Georgia,Helvetica,Prosto">http://example.com/responsive-type.php?google=Prosto+One&amp;font=Georgia,Helvetica,Prosto</a> One
+</code></pre>
+
+<p>If you really can't decide what font to use, you can even include both font libraries:</p>
+
+<pre><code><a href="http://example.com/responsive-type.php?typekit=nqy2rqt&amp;google=Prosto+One&amp;font=Georgia,chaparral-pro,Prosto">http://example.com/responsive-type.php?typekit=nqy2rqt&amp;google=Prosto+One&amp;font=Georgia,chaparral-pro,Prosto</a> One
+</code></pre>
+
+<h2>Font Availability</h2>
+
+<p>Some fonts might look very similar, so how do you know if it's been included in your page? What happens if you've made a typo in the URL? I've added a script that detects what font is supposed to be there and compares it with the base font. This script is from <a href="http://www.lalit.org/lab/javascript-css-font-detect/">lalit.lab</a>, I did none of the hard work. </p>
+
+<p>If the font is available, you get a green square next to the font name. If not, you get a red square. You might not want the overhead of javascript, so you can exclude it from the page using the 'js=no' parameter (PHP version).</p>
+
+<pre><code><a href="http://example.com/responsive-type.php?font=Georgia,Helvetica&amp;js=no">http://example.com/responsive-type.php?font=Georgia,Helvetica&amp;js=no</a>
+</code></pre>
+
+<p>The font availability script works for the JavaScript version, but not for web fonts. I'll try and fix this is future releases.</p>
+
+<h2>HTML / JavaScript Version</h2>
+
+<p>This version is in beta and still needs some testing and alteration, but use away and provide some feedback or modifications. </p>
+
+<h2>About</h2>
+
+<p>Forked from the original idea by <a href="http://twitter.com/Malarkey">@Malarkey</a>. PHP feedback, ideas and support to <a href="http://twitter.com/thefella">@thefella</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Responsive Type References maintained by <a href="https://github.com/thefella">thefella</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
